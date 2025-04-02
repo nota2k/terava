@@ -39,7 +39,7 @@ puis
     npm install && npm run build
     ```
 
-2.Installer Docker, l'ouvrir et lancez le `docker-compose` pour démarrer le serveur MySQL et PhpMyAdmin :
+2. Installer Docker, l'ouvrir et lancez le `docker-compose` pour démarrer le serveur MySQL et PhpMyAdmin :
     ```bash
     docker compose up
     ```
@@ -54,7 +54,7 @@ puis
     DB_PASSWORD=terava
     ```
 
-    Il faut aussi générer une clef unique d'application via artisan, qui remplira la variable APP_KEY= :
+Il faut aussi générer une clef unique d'application via artisan, qui remplira la variable APP_KEY= :
     ``php artisan key:generate``
 
     > **Note :** Ces variables sont spécifiques à l'environnement local et ne sont pas incluses dans le dépôt. En production, elles sont configurées selon les informations fournies par l'hébergeur.
