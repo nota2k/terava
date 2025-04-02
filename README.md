@@ -56,3 +56,4 @@ Pour démarrer le projet, exécutez :
 ```bash
 composer run dev
 ```
+Le projet se lance sur par défaut sur ``http://127.0.0.1:8000/``
