@@ -12,6 +12,11 @@ git clone https://github.com/nota2k/terava.git
 Si Composer n'est pas installé, suivez les instructions sur le site officiel :  
 [https://getcomposer.org/download/](https://getcomposer.org/download/)
 
+### PHP
+Assurez-vous que PHP est installé en version 8.2 ou supérieure.
+Pour vérifier la version de PHP :
+``php -v``
+
 ### Installer Laravel CLI
 ```bash
 composer global require laravel/installer
@@ -19,6 +24,12 @@ composer global require laravel/installer
 
 ### NodeJS
 Assurez-vous que NodeJS est installé en version 18 ou supérieure.
+``node -v``
+
+Pour changer de version, on liste les versions existantes :
+``nvm list``
+puis
+``nvm use v<numero de version>``
 
 ## Installation
 
@@ -28,12 +39,12 @@ Assurez-vous que NodeJS est installé en version 18 ou supérieure.
     npm install && npm run build
     ```
 
-2. Ouvrez Docker et lancez le `docker-compose` pour démarrer le serveur MySQL et PhpMyAdmin :
+2.Installer Docker, l'ouvrir et lancez le `docker-compose` pour démarrer le serveur MySQL et PhpMyAdmin :
     ```bash
     docker compose up
     ```
 
-3. Configurez les variables d'environnement dans le fichier `.env` pour la connexion à la base de données :
+3. Créer le fichier ``.env`` en copiant le contenu de ``.env.example`` à la racine et modifier les variables d'environnement pour la connexion à la base de données :
     ```
     DB_CONNECTION=mysql
     DB_HOST=localhost
@@ -42,6 +53,9 @@ Assurez-vous que NodeJS est installé en version 18 ou supérieure.
     DB_USERNAME=terava
     DB_PASSWORD=terava
     ```
+
+    Il faut aussi générer une clef unique d'application via artisan, qui remplira la variable APP_KEY= :
+    ``php artisan key:generate``
 
     > **Note :** Ces variables sont spécifiques à l'environnement local et ne sont pas incluses dans le dépôt. En production, elles sont configurées selon les informations fournies par l'hébergeur.
 
