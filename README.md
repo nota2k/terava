@@ -44,15 +44,7 @@ puis
     docker compose up
     ```
 
-3. Créer le fichier ``.env`` en copiant le contenu de ``.env.example`` à la racine et modifier les variables d'environnement pour la connexion à la base de données :
-    ```
-    DB_CONNECTION=mysql
-    DB_HOST=localhost
-    DB_PORT=3306
-    DB_DATABASE=terava_db
-    DB_USERNAME=terava
-    DB_PASSWORD=terava
-    ```
+3. Créer le fichier ``.env`` en copiant le contenu de ``.env.example``
 
 Il faut aussi générer une clef unique d'application via artisan, qui remplira la variable APP_KEY= :
     ``php artisan key:generate``
