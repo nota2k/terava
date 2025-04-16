@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Profile extends Model
 {
@@ -14,7 +15,6 @@ class Profile extends Model
      *
      * @var array
      */
-    public $timestamps = false;
     protected $fillable = [
         'username',
         'location',
@@ -31,5 +31,11 @@ class Profile extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'user_id' => 'integer',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

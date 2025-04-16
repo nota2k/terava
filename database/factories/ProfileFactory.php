@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Profile;
+use App\Models\User;
 
 class ProfileFactory extends Factory
 {
@@ -26,9 +27,7 @@ class ProfileFactory extends Factory
             'interests' => fake()->word(),
             'bio' => fake()->word(),
             'profile_picture' => fake()->word(),
-            'user_id' => \App\Models\User::query()->inRandomOrder()->value('id'),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'user_id' => User::factory(),
         ];
     }
 }

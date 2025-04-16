@@ -5,15 +5,15 @@ models:
     password: string
     created_at: datetime
     updated_at: datetime
-    # relationships:
-    #   hasOne: Profile
+    relationships:
+      hasOne: Profile
   Profile:
     username: string
     location: string
     interests: array:string
     bio: string
     profile_picture: string
-    user_id: integer
+    user_id: id foreign:User
 controllers:
   Api\Profile:
     index:

@@ -9,28 +9,5 @@ Route::get('/', function () {
 Route::resource('profiles', App\Http\Controllers\Api\ProfileController::class)->only('index');
 
 
-Route::resource('profiles', App\Http\Controllers\Api\ProfileController::class)->only('index');
-
-
-Route::resource('profiles', App\Http\Controllers\Api\ProfileController::class)->only('index');
-
-
-Route::resource('profiles', App\Http\Controllers\Api\ProfileController::class)->only('index');
-
-
 Route::resource('profiles', App\Http\Controllers\Api\ProfileController::class)->except('create', 'edit');
-
-
-Route::resource('profiles', App\Http\Controllers\Api\ProfileController::class)->except('create', 'edit');
-
-
-Route::resource('profiles', App\Http\Controllers\Api\ProfileController::class)->except('create', 'edit');
-
-
-Route::resource('profiles', App\Http\Controllers\Api\ProfileController::class)->except('create', 'edit');
-
-
-Route::resource('profiles', App\Http\Controllers\Api\ProfileController::class)->except('create', 'edit');
-
-
 Route::resource('profiles', App\Http\Controllers\Api\ProfileController::class)->except('create', 'edit');

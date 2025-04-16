@@ -5,46 +5,54 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ProfileController extends Controller
 {
-    public function index(Request $request): Response
+    public function index()
     {
         $profiles = Profile::all();
 
-        return $profiles;
+        return response()->json($profiles);
     }
 
-    public function show(Request $request, Profile $profile): Response
+    public function show($id)
     {
-        $profiles = Profile::find(id)->get();
+        $profile = Profile::find($id);
 
-        return $profiles;
+        if (!$profile) {
+            return response()->json(['message' => 'Profile not found'], 404);
+        }
+
+        return response()->json($profile);
     }
-
-    public function store(Request $request): Response
+    public function store(Request $request)
     {
         $profile = Profile::create($request->all());
 
-        return $profile;
+        return response()->json($profile, 201);
     }
-
-    public function update(Request $request, Profile $profile): Response
+    public function update(Request $request, $id)
     {
-        $profiles = Profile::find(id)->get();
+        $profile = Profile::find($id);
 
-        $profile->update([]);
+        if (!$profile) {
+            return response()->json(['message' => 'Profile not found'], 404);
+        }
 
-        return $profile;
+        $profile->update($request->all());
+
+        return response()->json($profile);
     }
-
-    public function destroy(Request $request, Profile $profile): Response
+    public function destroy($id)
     {
-        $profiles = Profile::find(id)->get();
+        $profile = Profile::find($id);
+
+        if (!$profile) {
+            return response()->json(['message' => 'Profile not found'], 404);
+        }
 
         $profile->delete();
 
-        return response()->noContent();
+        return response()->json(['message' => 'Profile deleted']);
     }
 }
