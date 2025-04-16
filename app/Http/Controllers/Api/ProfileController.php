@@ -32,7 +32,7 @@ class ProfileController extends Controller
 
     public function update($id, Profile $profile)
     {
-        $profiles = Profile::find($id)->get();
+        $profile = Profile::find($id)->get();
 
         $profile->update([]);
 
@@ -41,7 +41,7 @@ class ProfileController extends Controller
 
     public function destroy($id, Profile $profile)
     {
-        $profiles = Profile::find($id)->get();
+        $profile = Profile::find($id)->get();
 
         $profile->delete();
 

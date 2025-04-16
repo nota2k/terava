@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class User extends Model
 {
     use HasFactory;
-
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
@@ -41,6 +41,6 @@ class User extends Model
 
     public function profile(): HasOne
     {
-        return $this->hasOne(Profile::class, 'user_id');
+        return $this->hasOne(Profile::class, 'user_id', 'id');
     }
 }
