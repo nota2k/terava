@@ -26,7 +26,7 @@ class ProfileFactory extends Factory
             'interests' => fake()->word(),
             'bio' => fake()->word(),
             'profile_picture' => fake()->word(),
-            'user_id' => fake()->numberBetween(-10000, 10000),
+            'user_id' => \App\Models\User::query()->inRandomOrder()->value('id'),
             'created_at' => now(),
             'updated_at' => now(),
         ];
