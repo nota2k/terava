@@ -5,54 +5,46 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProfileController extends Controller
 {
     public function index()
     {
-        $profiles = Profile::all();
+        $profiles = Profile::with('user')->get();
 
         return response()->json($profiles);
     }
 
     public function show($id)
     {
-        $profile = Profile::find($id);
+        $profiles = Profile::find($id)->get();
 
-        if (!$profile) {
-            return response()->json(['message' => 'Profile not found'], 404);
-        }
-
-        return response()->json($profile);
+        return response()->json($profiles);
     }
+
     public function store(Request $request)
     {
         $profile = Profile::create($request->all());
 
-        return response()->json($profile, 201);
+        return response()->json($profile);
     }
-    public function update(Request $request, $id)
+
+    public function update($id, Profile $profile)
     {
-        $profile = Profile::find($id);
+        $profiles = Profile::find($id)->get();
 
-        if (!$profile) {
-            return response()->json(['message' => 'Profile not found'], 404);
-        }
-
-        $profile->update($request->all());
+        $profile->update([]);
 
         return response()->json($profile);
     }
-    public function destroy($id)
-    {
-        $profile = Profile::find($id);
 
-        if (!$profile) {
-            return response()->json(['message' => 'Profile not found'], 404);
-        }
+    public function destroy($id, Profile $profile)
+    {
+        $profiles = Profile::find($id)->get();
 
         $profile->delete();
 
-        return response()->json(['message' => 'Profile deleted']);
+        return response()->noContent();
     }
 }

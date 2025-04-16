@@ -24,8 +24,6 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->safeEmail(),
             'password' => fake()->password(),
-            'created_at' => fake()->dateTime(),
-            'updated_at' => fake()->dateTime(),
         ];
     }
 }

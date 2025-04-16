@@ -35,15 +35,12 @@ class User extends Model
      *
      * @var array
      */
-    public $timestamps = false;
     protected $casts = [
         'id' => 'integer',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
     ];
 
     public function profile(): HasOne
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasOne(Profile::class, 'user_id');
     }
 }

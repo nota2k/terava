@@ -3,10 +3,8 @@ models:
     name: string
     email: string
     password: string
-    created_at: datetime
-    updated_at: datetime
     relationships:
-      hasOne: Profile
+      hasOne: profile.user_id
   Profile:
     username: string
     location: string
@@ -14,24 +12,46 @@ models:
     bio: string
     profile_picture: string
     user_id: id foreign:User
-controllers:
-  Api\Profile:
-    index:
-      query: all
-      respond: profiles
-    show:
-      query: find:id
-      respond: profiles
-    store:
-      request: create
-      save: profile
-      respond: profile
-    update:
-      request: update
-      query: find:id
-      update: profile
-      respond: profile
-    destroy:
-      query: find:id
-      delete: profile
-      respond: 204
+    relationships:
+      belongsTo: User
+# controllers:
+#   Api\User:
+#       index:
+#         query: all
+#         respond: users
+#       show:
+#         query: find:id
+#         respond: users
+#       store:
+#         request: create
+#         save: user
+#         respond: user
+#       update:
+#         request: update
+#         query: find:id
+#         update: user
+#         respond: user
+#       destroy:
+#         query: find:id
+#         delete: user
+#         respond: 204
+#   Api\Profile:
+#     index:
+#       query: all
+#       respond: profiles
+#     show:
+#       query: find:id
+#       respond: profiles
+#     store:
+#       request: create
+#       save: profile
+#       respond: profile
+#     update:
+#       request: update
+#       query: find:id
+#       update: profile
+#       respond: profile
+#     destroy:
+#       query: find:id
+#       delete: profile
+#       respond: 204
