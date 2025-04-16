@@ -1,0 +1,15 @@
+created:
+    - app/Http/Controllers/Api/ProfileController.php
+    - database/factories/UserFactory.php
+    - database/factories/ProfileFactory.php
+    - database/migrations/2025_04_16_131304_create_users_table.php
+    - database/migrations/2025_04_16_131305_create_profiles_table.php
+    - app/Models/User.php
+    - app/Models/Profile.php
+    - tests/Feature/Http/Controllers/Api/ProfileControllerTest.php
+updated:
+    - routes/web.php
+models:
+    Profile: { username: string, location: string, interests: 'array:string', bio: string, profile_picture: string, user_id: integer }
+    User: { name: string, email: string, password: string, created_at: datetime, updated_at: datetime }
+    Profiles: { username: string, location: string, interests: 'array:string', bio: string, profile_picture: string, user_id: integer }

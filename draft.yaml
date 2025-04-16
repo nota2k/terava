@@ -1,0 +1,37 @@
+models:
+  User:
+    name: string
+    email: string
+    password: string
+    created_at: datetime
+    updated_at: datetime
+    # relationships:
+    #   hasOne: Profile
+  Profile:
+    username: string
+    location: string
+    interests: array:string
+    bio: string
+    profile_picture: string
+    user_id: integer
+controllers:
+  Api\Profile:
+    index:
+      query: all
+      respond: profiles
+    show:
+      query: find:id
+      respond: profiles
+    store:
+      request: create
+      save: profile
+      respond: profile
+    update:
+      request: update
+      query: find:id
+      update: profile
+      respond: profile
+    destroy:
+      query: find:id
+      delete: profile
+      respond: 204

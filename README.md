@@ -70,4 +70,4 @@ Le projet se lance sur par défaut sur ``http://127.0.0.1:8000/``
 En cas de message d'erreur lors de la première migration de la DB :
 ``  SQLSTATE[HY000] [1698] Access denied for user 'terava'@'localhost' (Connection: mysql, SQL: select exists (select 1 from information_schema.tables where table_schema = schema() and table_name = 'migrations' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED')) as `exists`)``
 
-Il faut basculer le ``DB_HOST=127.0.0.1`` et ``localhost`` et recommencer la migration
+Il faut basculer le ``DB_HOST=127.0.0.1`` et ``localhost`` ou inversement et recommencer la migration

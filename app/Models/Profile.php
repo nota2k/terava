@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Profile extends Model
 {
     use HasFactory;
 
@@ -14,19 +14,14 @@ class User extends Model
      *
      * @var array
      */
+    public $timestamps = false;
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
+        'username',
+        'location',
+        'interests',
+        'bio',
+        'profile_picture',
+        'user_id',
     ];
 
     /**
@@ -36,7 +31,5 @@ class User extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
     ];
 }
