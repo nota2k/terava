@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->string('username');
@@ -18,9 +20,11 @@ return new class extends Migration
             $table->string('interests');
             $table->string('bio');
             $table->string('profile_picture');
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

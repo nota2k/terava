@@ -34,6 +34,7 @@ class User extends Model
      *
      * @var array
      */
+    public $timestamps = false;
     protected $casts = [
         'id' => 'integer',
         'created_at' => 'datetime',
