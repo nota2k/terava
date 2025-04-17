@@ -11,8 +11,12 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('profile')->find($user->id);
-        // eager load the profile relationship
+        $users = User::all();
+
+        foreach($users as $user) {
+            // eager load the profile relationship
+            $user->profile = User::with('profile')->find($user->id)->profile;
+        }
 
         return response()->json($users);
     }
@@ -26,12 +30,6 @@ class UserController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
         return response()->json($profile);
-    }
-
-    public function showProfile($id)
-    {
-        $user = User::with('profile')->findOrFail($id);
-        return response()->json($user->profile);
     }
 
     public function store(Request $request)
