@@ -2,20 +2,26 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use OpenApi\Attributes as OA;
 
-class User extends Authenticatable
+#[OA\Schema(schema: "User", properties: [
+    new OA\Property(property: "name", type: "string", example: ""),
+    new OA\Property(property: "email", type: "string", example: ""),
+    new OA\Property(property: "password", type: "string", example: "")
+])]
+
+class User extends Model
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
 
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var array
      */
     protected $fillable = [
         'name',
@@ -26,23 +32,37 @@ class User extends Authenticatable
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var list<string>
+     * @var array
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
-     * @return array<string, string>
+     * @var array
      */
-    protected function casts(): array
+    protected $casts = [
+        'id' => 'integer',
+    ];
+
+    public function profile(): HasOne
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasOne(Profile::class, 'user_id', 'id');
+    }
+
+    protected static function booted()
+    {
+        static::created(function (User $user) {
+            // Créer un profil associé à l'utilisateur
+            $user->profile()->create([
+                'username' => $user->name, // Exemple : utiliser le nom de l'utilisateur comme username
+                'location' => '', // Valeur par défaut
+                'interests' => '', // Valeur par défaut
+                'bio' => '', // Valeur par défaut
+                'profile_picture' => '', // Valeur par défaut
+            ]);
+        });
     }
 }
