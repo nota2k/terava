@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\ProfileController;
 
 Route::get('/users', [ProfileController::class, 'index']);
 Route::get('/users/{id}', [ProfileController::class, 'show']);
-Route::post('/users', [ProfileController::class, 'store']);
+Route::post('/user/add', [ProfileController::class, 'store']);
 Route::put('/users/{id}', [ProfileController::class, 'update']);
 Route::delete('/users/{id}', [ProfileController::class, 'destroy']);
 
