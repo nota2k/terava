@@ -1,16 +1,25 @@
 models:
-  User:
+  # User:
+  #   name: string
+  #   email: string
+  #   password: string
+  #   relationships:
+  #     hasOne: profile.user_id
+  # Profile:
+  #   username: string
+  #   location: string
+  #   interests: array:string
+  #   bio: string
+  #   profile_picture: string
+  #   user_id: id foreign:User
+  #   relationships:
+  #     belongsTo: User
+  Trip:
     name: string
-    email: string
-    password: string
-    relationships:
-      hasOne: profile.user_id
-  Profile:
-    username: string
+    description: string
+    start_date: date
+    end_date: date
     location: string
-    interests: array:string
-    bio: string
-    profile_picture: string
     user_id: id foreign:User
     relationships:
       belongsTo: User
