@@ -15,7 +15,7 @@ use OpenApi\Attributes as OA;
 class UserController extends Controller
 {
     #[OA\Get(
-        path: '/users',
+        path: '/api/users',
         summary: 'Liste tous les utilisateurs',
         tags: ['Users'],
         responses: [
@@ -36,7 +36,7 @@ class UserController extends Controller
     }
 
     #[OA\Get(
-        path: '/users/{id}',
+        path: '/api/users/{id}',
         summary: 'Récupérer un utilisateur par ID',
         tags: ['Users'],
         parameters: [
@@ -113,13 +113,17 @@ class UserController extends Controller
         requestBody: new OA\RequestBody(
             description: 'Données utilisateur à mettre à jour',
             required: true,
-            content: new OA\JsonContent(ref: '#/components/schemas/User')
+            content: new OA\JsonContent(
+                ref: User::class
+            )
         ),
         responses: [
             new OA\Response(
                 response: 200,
                 description: 'Utilisateur mis à jour avec succès',
-                content: new OA\JsonContent(ref: '#/components/schemas/User')
+                content: new OA\JsonContent(
+                    ref: User::class
+                )
             ),
             new OA\Response(
                 response: 404,
@@ -135,7 +139,7 @@ class UserController extends Controller
     }
 
     #[OA\Delete(
-        path: '/users/{id}',
+        path: '/api/users/{id}',
         tags: ['Users'],
         summary: 'Supprimer un utilisateur',
         parameters: [
@@ -158,10 +162,10 @@ class UserController extends Controller
             )
         ]
     )]
-    public function destroy($id): Response
+    public function destroy($id)
     {
-        $user = User::with('profile')->findOrFail($id);
+        $user = User::findOrFail($id);
         $user->delete();
-        return response()->noContent();
+        return response()->json(null, 204);
     }
 }

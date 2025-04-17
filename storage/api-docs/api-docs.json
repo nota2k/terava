@@ -5,27 +5,57 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/users": {
+        "/api/users": {
             "get": {
                 "tags": [
                     "Users"
                 ],
                 "summary": "Liste tous les utilisateurs",
-                "operationId": "7208c29037df2b8bb02499ba39ed8a78",
+                "operationId": "566aed8efb436ca506e0ef51a032ecd9",
                 "responses": {
                     "200": {
                         "description": "Succès"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Créer un nouvel utilisateur",
+                "operationId": "store",
+                "requestBody": {
+                    "description": "Objet utilisateur à créer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
-        "/users/{id}": {
+        "/api/users/{id}": {
             "get": {
                 "tags": [
                     "Users"
                 ],
                 "summary": "Récupérer un utilisateur par ID",
-                "operationId": "6946bbab7898f59a09e3c8e529a38907",
+                "operationId": "6f51bd5fa2dddcd25e44cfa53dcbd10a",
                 "parameters": [
                     {
                         "name": "id",
@@ -53,6 +83,34 @@
                     }
                 }
             },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Supprimer un utilisateur",
+                "operationId": "0b4133ed462528a5e648b88ead11e929",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Utilisateur supprimé avec succès"
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
             "put": {
                 "tags": [
                     "Users"
@@ -94,64 +152,6 @@
                     },
                     "404": {
                         "description": "Utilisateur non trouvé"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Supprimer un utilisateur",
-                "operationId": "b3d28da5dc9de7fc1bd425f93b54ff7b",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID de l'utilisateur",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Utilisateur supprimé avec succès"
-                    },
-                    "404": {
-                        "description": "Utilisateur non trouvé"
-                    }
-                }
-            }
-        },
-        "/api/users": {
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Créer un nouvel utilisateur",
-                "operationId": "store",
-                "requestBody": {
-                    "description": "Objet utilisateur à créer",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Utilisateur créé avec succès",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User"
-                                }
-                            }
-                        }
                     }
                 }
             }
