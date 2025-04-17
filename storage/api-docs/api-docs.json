@@ -83,40 +83,12 @@
                     }
                 }
             },
-            "delete": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Supprimer un utilisateur",
-                "operationId": "0b4133ed462528a5e648b88ead11e929",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID de l'utilisateur",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Utilisateur supprimé avec succès"
-                    },
-                    "404": {
-                        "description": "Utilisateur non trouvé"
-                    }
-                }
-            }
-        },
-        "/users/{id}": {
             "put": {
                 "tags": [
                     "Users"
                 ],
                 "summary": "Mettre à jour un utilisateur",
-                "operationId": "05028d02ea3e9a99abd6260cfe05b179",
+                "operationId": "070e37fc9aff78ae73860751bc990ed3",
                 "parameters": [
                     {
                         "name": "id",
@@ -154,6 +126,32 @@
                         "description": "Utilisateur non trouvé"
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Supprimer un utilisateur",
+                "operationId": "0b4133ed462528a5e648b88ead11e929",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Utilisateur supprimé avec succès"
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    }
+                }
             }
         }
     },
@@ -163,15 +161,15 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "example": "John"
+                        "example": ""
                     },
                     "email": {
                         "type": "string",
-                        "example": "john.doe@gmail.com"
+                        "example": ""
                     },
                     "password": {
                         "type": "string",
-                        "example": "password"
+                        "example": ""
                     }
                 },
                 "type": "object"

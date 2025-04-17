@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(schema: "User", properties: [
-    new OA\Property(property: "name", type: "string", example: "John"),
-    new OA\Property(property: "email", type: "string", example: "john.doe@gmail.com"),
-    new OA\Property(property: "password", type: "string", example: "password")
+    new OA\Property(property: "name", type: "string", example: ""),
+    new OA\Property(property: "email", type: "string", example: ""),
+    new OA\Property(property: "password", type: "string", example: "")
 ])]
 
 class User extends Model

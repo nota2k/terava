@@ -98,7 +98,7 @@ class UserController extends Controller
     }
 
     #[OA\Put(
-        path: '/users/{id}',
+        path: '/api/users/{id}',
         tags: ['Users'],
         summary: 'Mettre à jour un utilisateur',
         parameters: [
@@ -133,7 +133,10 @@ class UserController extends Controller
     )]
     public function update(Request $request, $id)
     {
-        $user = User::with('profile')->findOrFail($id);
+        $user = User::findOrFail($id);
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
         $user->update($request->all());
         return response()->json($user);
     }
