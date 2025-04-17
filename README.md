@@ -71,3 +71,67 @@ En cas de message d'erreur lors de la première migration de la DB :
 ``  SQLSTATE[HY000] [1698] Access denied for user 'terava'@'localhost' (Connection: mysql, SQL: select exists (select 1 from information_schema.tables where table_schema = schema() and table_name = 'migrations' and table_type in ('BASE TABLE', 'SYSTEM VERSIONED')) as `exists`)``
 
 Il faut basculer le ``DB_HOST=127.0.0.1`` et ``localhost`` ou inversement et recommencer la migration
+
+```mermaid
+erDiagram
+    USERS ||--|| PROFILES : has
+    USERS ||--o{ TRIPS : has
+    TRIPS ||--o{ MATCHES : is_part_of
+    MATCHES ||--|| TRIPS : involves
+    MATCHES ||--|| TRIPS : also_involves
+    MATCHES ||--|{ MESSAGES : contains
+    TRIPS ||--o{ LOCATIONS : occurs_at
+
+    USERS {
+        int id PK
+        string username
+        string email
+        string password_hash
+        datetime created_at
+    }
+
+    PROFILES {
+        int id PK
+        int user_id FK
+        text bio
+        string profile_picture_url
+        string gender
+        date birthdate
+        string interests
+    }
+
+    TRIPS {
+        int id PK
+        int user_id FK
+        date start_date
+        date end_date
+        int location_id FK
+        string trip_type
+        string title
+        text description
+    }
+
+    LOCATIONS {
+        int id PK
+        string city
+        string country
+        float latitude
+        float longitude
+    }
+
+    MATCHES {
+        int id PK
+        int trip1_id FK
+        int trip2_id FK
+        datetime matched_at
+        string status
+    }
+
+    MESSAGES {
+        int id PK
+        int match_id FK
+        int sender_id FK
+        text content
+        datetime sent_at
+    }
+```
