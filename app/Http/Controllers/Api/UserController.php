@@ -70,7 +70,7 @@ class UserController extends Controller
     }
 
     #[OA\Post(
-        path: '/users',
+        path: '/api/users',
         tags: ['Users'],
         summary: 'Créer un nouvel utilisateur',
         operationId: 'store',
@@ -85,7 +85,9 @@ class UserController extends Controller
             new OA\Response(
                 response: 201,
                 description: 'Utilisateur créé avec succès',
-                content: new OA\JsonContent(ref: '#/components/schemas/User')
+                content: new OA\JsonContent(
+                    ref: User::class
+                )
             )
         ]
     )]

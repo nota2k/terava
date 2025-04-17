@@ -17,36 +17,6 @@
                         "description": "Succès"
                     }
                 }
-            },
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Créer un nouvel utilisateur",
-                "operationId": "store",
-                "requestBody": {
-                    "description": "Objet utilisateur à créer",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/User"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Utilisateur créé avec succès",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/User"
-                                }
-                            }
-                        }
-                    }
-                }
             }
         },
         "/users/{id}": {
@@ -153,6 +123,38 @@
                     }
                 }
             }
+        },
+        "/api/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Créer un nouvel utilisateur",
+                "operationId": "store",
+                "requestBody": {
+                    "description": "Objet utilisateur à créer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -161,11 +163,15 @@
                 "properties": {
                     "name": {
                         "type": "string",
-                        "example": "Jhon"
+                        "example": "John"
                     },
                     "email": {
                         "type": "string",
-                        "example": "Doe"
+                        "example": "john.doe@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "password"
                     }
                 },
                 "type": "object"
