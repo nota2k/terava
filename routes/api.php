@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\UserController;
 
 Route::apiResource('users', App\Http\Controllers\Api\UserController::class);
 Route::get('/users/{id}/profil', [UserController::class, 'getUserProfile']);
+Route::put('/users/{id}/profil', [UserController::class, 'updateUserProfile']);
 // Route::get('/api/users/{id}/profile', [UserController::class, 'getUserProfile']);
 // Route::get('/users', [UserController::class, 'index']);
 // Route::get('/users/{id}', [UserController::class, 'show']);

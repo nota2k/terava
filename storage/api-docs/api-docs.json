@@ -187,11 +187,80 @@
                         "description": "Utilisateur non trouvé"
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Mettre à jour le profil d'un utilisateur",
+                "operationId": "updateUserProfile",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Données du profil à mettre à jour",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Profile"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Profil mis à jour avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Profile"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Utilisateur ou profil non trouvé"
+                    }
+                }
             }
         }
     },
     "components": {
         "schemas": {
+            "Profile": {
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "location": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "interests": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "bio": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "profile_picture": {
+                        "type": "string",
+                        "example": ""
+                    }
+                },
+                "type": "object"
+            },
             "User": {
                 "properties": {
                     "name": {
