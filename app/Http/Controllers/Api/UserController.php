@@ -69,6 +69,46 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    #[OA\Get(
+        path: '/api/users/{id}/profil',
+        summary: 'Récupérer le profil d\'un utilisateur par ID',
+        operationId: 'getUserProfile',
+        tags: ['Users'],
+        parameters: [
+            new OA\Parameter(
+                name: 'id',
+                description: 'ID de l\'utilisateur',
+                in: 'path',
+                required: true,
+                schema: new OA\Schema(type: 'integer')
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Succès',
+                content: new OA\JsonContent(ref: '#/components/schemas/User')
+            ),
+            new OA\Response(
+                response: 404,
+                description: 'Utilisateur non trouvé'
+            )
+        ]
+    )]
+    public function getUserProfile($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+        // Récupérer le profil de l'utilisateur
+        $profile = $user->profile;
+        if (!$profile) {
+            return response()->json(['message' => 'Profile not found'], 404);
+        }
+        return response()->json($profile);
+    }
+
     #[OA\Post(
         path: '/api/users',
         tags: ['Users'],
@@ -139,6 +179,70 @@ class UserController extends Controller
         }
         $user->update($request->all());
         return response()->json($user);
+    }
+
+    #[OA\Put(
+        path: '/api/users/{id}/profil',
+        summary: 'Mettre à jour le profil d\'un utilisateur',
+        operationId: 'updateUserProfile',
+        tags: ['Users'],
+        parameters: [
+            new OA\Parameter(
+                name: 'id',
+                description: 'ID de l\'utilisateur',
+                in: 'path',
+                required: true,
+                schema: new OA\Schema(type: 'integer')
+            )
+        ],
+        requestBody: new OA\RequestBody(
+            description: 'Données du profil à mettre à jour',
+            required: true,
+            content: new OA\JsonContent(
+                ref: '#/components/schemas/Profile'
+            )
+        ),
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Profil mis à jour avec succès',
+                content: new OA\JsonContent(
+                    ref: '#/components/schemas/Profile'
+                )
+            ),
+            new OA\Response(
+                response: 404,
+                description: 'Utilisateur ou profil non trouvé'
+            )
+        ]
+    )]
+    public function updateUserProfile(Request $request, $id)
+    {
+        // Vérifier si l'utilisateur existe
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(['message' => 'Utilisateur non trouvé'], 404);
+        }
+
+        // Vérifier si le profil existe
+        $profile = $user->profile;
+        if (!$profile) {
+            return response()->json(['message' => 'Profil non trouvé'], 404);
+        }
+
+        // Valider les données si nécessaire
+        $validated = $request->validate([
+            'username' => 'sometimes|string|max:255',
+            'location' => 'sometimes|string|max:255',
+            'interests' => 'sometimes|string',
+            'bio' => 'sometimes|string',
+            'profile_picture' => 'sometimes|string'
+        ]);
+
+        // Mettre à jour le profil
+        $profile->update($validated);
+
+        return response()->json($profile);
     }
 
     #[OA\Delete(

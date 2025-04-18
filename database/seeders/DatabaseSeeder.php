@@ -14,11 +14,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Générer 10 utilisateurs fictifs
-        User::factory(10)->create();
+        // Générer 10 utilisateurs
+        User::factory(20)->create();
+
+        $users = User::all();
+        foreach ($users as $user) {
+            // eager load the profile relationship
+            Profile::factory()->for($user)->create();
+        }
+
 
         // Générer 20 profils fictifs
-        Profile::factory(20)->create();
+        // Profile::factory(20)->create();
 
     }
 }
