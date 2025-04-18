@@ -13,7 +13,7 @@ class TripController extends Controller
     #[OA\Get(
         path: '/api/trips',
         summary: 'Liste tous les voyages',
-        tags: ['Voyages'],
+        tags: ['Trip'],
         responses: [
             new OA\Response(
                 response: 200,
@@ -28,9 +28,35 @@ class TripController extends Controller
         return response()->json($trips);
     }
 
+    #[OA\Get(
+        path: '/api/trips/{id}',
+        summary: 'Récupérer un voyage par ID',
+        tags: ['Trip'],
+        parameters: [
+            new OA\Parameter(
+                name: 'id',
+                description: 'ID du voyage',
+                in: 'path',
+                required: true,
+                schema: new OA\Schema(type: 'integer')
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Succès',
+                content: new OA\JsonContent(ref: '#/components/schemas/Trip')
+            ),
+            new OA\Response(
+                response: 404,
+                description: 'Voyage non trouvé'
+            )
+        ]
+    )]
+
     public function show($id)
     {
-        $trip = Trip::find($id)->get();
+        $trip = Trip::findOrFail($id);
 
         return response()->json($trip);
     }

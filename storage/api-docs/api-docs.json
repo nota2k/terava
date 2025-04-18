@@ -8,13 +8,48 @@
         "/api/trips": {
             "get": {
                 "tags": [
-                    "Voyages"
+                    "Trip"
                 ],
                 "summary": "Liste tous les voyages",
                 "operationId": "34b92215d6018d9559a016ee14964292",
                 "responses": {
                     "200": {
                         "description": "Succès"
+                    }
+                }
+            }
+        },
+        "/api/trips/{id}": {
+            "get": {
+                "tags": [
+                    "Trip"
+                ],
+                "summary": "Récupérer un voyage par ID",
+                "operationId": "13396a55edca639601ea94929fad90ba",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du voyage",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Trip"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Voyage non trouvé"
                     }
                 }
             }
@@ -331,8 +366,8 @@
     },
     "tags": [
         {
-            "name": "Voyages",
-            "description": "Voyages"
+            "name": "Trip",
+            "description": "Trip"
         },
         {
             "name": "Users",
