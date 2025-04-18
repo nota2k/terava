@@ -14,53 +14,73 @@ models:
   #   user_id: id foreign:User
   #   relationships:
   #     belongsTo: User
-  Trip:
-    name: string
-    description: string
-    start_date: date
-    end_date: date
-    location: string
-    user_id: id foreign:User
-    relationships:
-      belongsTo: User
-# controllers:
-#   Api\User:
-#       index:
-#         query: all
-#         respond: users
-#       show:
-#         query: find:id
-#         respond: users
-#       store:
-#         request: create
-#         save: user
-#         respond: user
-#       update:
-#         request: update
-#         query: find:id
-#         update: user
-#         respond: user
-#       destroy:
-#         query: find:id
-#         delete: user
-#         respond: 204
-#   Api\Profile:
-#     index:
-#       query: all
-#       respond: profiles
-#     show:
-#       query: find:id
-#       respond: profiles
-#     store:
-#       request: create
-#       save: profile
-#       respond: profile
-#     update:
-#       request: update
-#       query: find:id
-#       update: profile
-#       respond: profile
-#     destroy:
-#       query: find:id
-#       delete: profile
-#       respond: 204
+  # Trip:
+  #   name: string
+  #   description: string
+  #   start_date: date
+  #   end_date: date
+  #   location: string
+  #   user_id: id foreign:User
+  #   relationships:
+  #     belongsTo: User
+controllers:
+  # Api\User:
+  #     index:
+  #       query: all
+  #       respond: users
+  #     show:
+  #       query: find:id
+  #       respond: users
+  #     store:
+  #       request: create
+  #       save: user
+  #       respond: user
+  #     update:
+  #       request: update
+  #       query: find:id
+  #       update: user
+  #       respond: user
+  #     destroy:
+  #       query: find:id
+  #       delete: user
+  #       respond: 204
+  # Api\Profile:
+  #   index:
+  #     query: all
+  #     respond: profiles
+  #   show:
+  #     query: find:id
+  #     respond: profiles
+  #   store:
+  #     request: create
+  #     save: profile
+  #     respond: profile
+  #   update:
+  #     request: update
+  #     query: find:id
+  #     update: profile
+  #     respond: profile
+  #   destroy:
+  #     query: find:id
+  #     delete: profile
+  #     respond: 204
+  Api\Trip:
+    index:
+      query: all
+      respond: trips
+    show:
+      query: find:id
+      respond: trips
+    store:
+      request: create
+      save: trip
+      respond: trip
+    update:
+      request: update
+      query: find:id
+      update: trip
+      respond: trip
+    destroy:
+      query: find:id
+      delete: trip
+      respond: 204

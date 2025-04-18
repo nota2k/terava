@@ -1,10 +1,24 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Mon API Laravel",
+        "title": "Terava API",
         "version": "1.0.0"
     },
     "paths": {
+        "/api/trips": {
+            "get": {
+                "tags": [
+                    "Voyages"
+                ],
+                "summary": "Liste tous les voyages",
+                "operationId": "34b92215d6018d9559a016ee14964292",
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                }
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [
@@ -265,6 +279,37 @@
                 },
                 "type": "object"
             },
+            "Trip": {
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Mon voyage à Paris"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Un voyage incroyable à Paris."
+                    },
+                    "start_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-10-01"
+                    },
+                    "end_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-10-10"
+                    },
+                    "country": {
+                        "type": "string",
+                        "example": "France"
+                    },
+                    "city": {
+                        "type": "string",
+                        "example": "Paris"
+                    }
+                },
+                "type": "object"
+            },
             "User": {
                 "properties": {
                     "username": {
@@ -285,6 +330,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Voyages",
+            "description": "Voyages"
+        },
         {
             "name": "Users",
             "description": "Users"

@@ -26,7 +26,8 @@ class TripFactory extends Factory
             'description' => fake()->paragraph(),
             'start_date' => fake()->dateTimeThisYear(),
             'end_date' => fake()->dateTimeThisYear(),
-            'location' => fake()->city(),
+            'country' => fake()->country(),
+            'city' => fake()->city(),
             'user_id' => User::factory(),
         ];
     }

@@ -1,7 +1,8 @@
 created:
-    - database/factories/TripFactory.php
-    - database/migrations/2025_04_17_144106_create_trips_table.php
-    - app/Models/Trip.php
+    - app/Http/Controllers/Api/TripController.php
+    - tests/Feature/Http/Controllers/Api/TripControllerTest.php
+updated:
+    - routes/web.php
 models:
     Profile: { username: string, location: string, interests: 'array:string', bio: string, profile_picture: string, user_id: 'id foreign:User', relationships: { belongsTo: User } }
     User: { name: string, email: string, password: string, relationships: { hasOne: profile.user_id } }
