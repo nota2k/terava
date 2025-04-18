@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Relations\belongsTo;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(schema: "Profile", properties: [
-    new OA\Property(property: "username", type: "string", example: ""),
+    new OA\Property(property: "firstname", type: "string", example: ""),
+    new OA\Property(property: "lastname", type: "string", example: ""),
     new OA\Property(property: "location", type: "string", example: ""),
     new OA\Property(property: "interests", type: "string", example: ""),
     new OA\Property(property: "bio", type: "string", example: ""),
@@ -25,7 +26,8 @@ class Profile extends Model
      * @var array
      */
     protected $fillable = [
-        'username',
+        'firstname',
+        'lastname',
         'location',
         'interests',
         'bio',

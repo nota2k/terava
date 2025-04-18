@@ -238,7 +238,11 @@
         "schemas": {
             "Profile": {
                 "properties": {
-                    "username": {
+                    "firstname": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "lastname": {
                         "type": "string",
                         "example": ""
                     },
@@ -263,7 +267,7 @@
             },
             "User": {
                 "properties": {
-                    "name": {
+                    "username": {
                         "type": "string",
                         "example": ""
                     },

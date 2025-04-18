@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(schema: "User", properties: [
-    new OA\Property(property: "name", type: "string", example: ""),
+    new OA\Property(property: "username", type: "string", example: ""),
     new OA\Property(property: "email", type: "string", example: ""),
     new OA\Property(property: "password", type: "string", example: "")
 ])]
@@ -24,7 +24,7 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
     ];
@@ -52,17 +52,18 @@ class User extends Model
         return $this->hasOne(Profile::class, 'user_id', 'id');
     }
 
-    protected static function booted()
-    {
-        static::created(function (User $user) {
-            // Créer un profil associé à l'utilisateur
-            $user->profile()->create([
-                'username' => $user->name, // Exemple : utiliser le nom de l'utilisateur comme username
-                'location' => '', // Valeur par défaut
-                'interests' => '', // Valeur par défaut
-                'bio' => '', // Valeur par défaut
-                'profile_picture' => '', // Valeur par défaut
-            ]);
-        });
-    }
+    // protected static function booted()
+    // {
+    //     static::created(function (User $user) {
+    //         // Créer un profil associé à l'utilisateur
+    //         $user->profile()->create([
+    //             'firstname' => '', // Exemple : utiliser le nom de l'utilisateur comme username
+    //             'lastname' => '', // Valeur par défaut
+    //             'location' => '', // Valeur par défaut
+    //             'interests' => '', // Valeur par défaut
+    //             'bio' => '', // Valeur par défaut
+    //             'profile_picture' => '', // Valeur par défaut
+    //         ]);
+    //     });
+    // }
 }
