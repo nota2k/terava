@@ -69,6 +69,46 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    #[OA\Get(
+        path: '/api/users/{id}/profil',
+        summary: 'Récupérer le profil d\'un utilisateur par ID',
+        operationId: 'getUserProfile',
+        tags: ['Users'],
+        parameters: [
+            new OA\Parameter(
+                name: 'id',
+                description: 'ID de l\'utilisateur',
+                in: 'path',
+                required: true,
+                schema: new OA\Schema(type: 'integer')
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Succès',
+                content: new OA\JsonContent(ref: '#/components/schemas/User')
+            ),
+            new OA\Response(
+                response: 404,
+                description: 'Utilisateur non trouvé'
+            )
+        ]
+    )]
+    public function getUserProfile($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+        // Récupérer le profil de l'utilisateur
+        $profile = $user->profile;
+        if (!$profile) {
+            return response()->json(['message' => 'Profile not found'], 404);
+        }
+        return response()->json($profile);
+    }
+
     #[OA\Post(
         path: '/api/users',
         tags: ['Users'],

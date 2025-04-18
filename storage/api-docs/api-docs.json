@@ -153,6 +153,41 @@
                     }
                 }
             }
+        },
+        "/api/users/{id}/profil": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Récupérer le profil d'un utilisateur par ID",
+                "operationId": "getUserProfile",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    }
+                }
+            }
         }
     },
     "components": {
