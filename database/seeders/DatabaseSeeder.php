@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Trip;
+use App\Models\Profile;
+use App\Models\Trip;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
