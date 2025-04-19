@@ -60,11 +60,33 @@ Il faut aussi générer une clef unique d'application via artisan, qui remplira 
 
 Pour démarrer le projet, exécutez :
 ```bash
+docker compose up -d
 composer run dev
 ```
 Le projet se lance sur par défaut sur ``http://127.0.0.1:8000/``
 
 
+## Pour lancer une première migration
+```bash
+php artisan migrate
+```
+
+## Pour générer des fake data
+Les données sont préformatées dans les Factories, FakerPHP va générer de fausses données via ses propres fonctions. On peut retrouver l'ensemble des fonctions dans https://fakerphp.org/
+Puis pour seeder la base de données avec les fausses data :
+```
+php artisan migrate:fresh --seed
+```
+
+##Swagger
+Le Swagger est une documentation API qui permet de tester les différents endpoints (routes) sans passer par Postman par exemple. Le fonctionnement du Swagger est détaillé ici : https://zircote.github.io/swagger-php/guide/examples.html#controllers-petcontroller-php
+Pour que le swagger fonctionne, il faut déclarer chaque endpoints dans le Controller et déclarer les propriétés dans chaque Model. Le Swagger va générer un api-doc.json qui contient tous les schemas qui ont été générés. Ces schemas vont permettre au Swagger de récupérer les propriétés de chaque Class et de pouvoir les utiliser dans les requêtes/réponses.
+L'accès à la documentation de l'API se trouve ici : http://127.0.0.1:8000/api/documentation
+
+Pour générer le Swagger :
+```bash
+php artisan l5-swagger:generate
+```
 ##Troubleshooting 
 
 En cas de message d'erreur lors de la première migration de la DB :
