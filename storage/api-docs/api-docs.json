@@ -5,6 +5,139 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/locations": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Liste toutes les locations",
+                "description": "Display a listing of the resource.",
+                "operationId": "4a95f25c1e13530115fd3fd6961b92de",
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Créer une nouvelle location",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "2e940d1dad83fe7c7fb5a308a7f6d84a",
+                "requestBody": {
+                    "description": "Données de la location",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Location"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Location créée avec succès"
+                    }
+                }
+            }
+        },
+        "/api/locations/{id}": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Récupérer une location par ID",
+                "description": "Display the specified resource.",
+                "operationId": "5ac0324577506ee36225fdb6a881506c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la location",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    },
+                    "404": {
+                        "description": "Location non trouvée"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Mettre à jour une location",
+                "description": "Update the specified resource in storage.",
+                "operationId": "42f75cf2951683141c55565f6c6e10ea",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la location",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Données de la location à mettre à jour",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Location"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Location mise à jour avec succès"
+                    },
+                    "404": {
+                        "description": "Location non trouvée"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Supprimer une location",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "32274c410d9a158665aabbb58f7830ad",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la location",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Location supprimée avec succès"
+                    },
+                    "404": {
+                        "description": "Location non trouvée"
+                    }
+                }
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [
@@ -236,6 +369,27 @@
     },
     "components": {
         "schemas": {
+            "Location": {
+                "properties": {
+                    "city": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "country": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "latitude": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "longitude": {
+                        "type": "string",
+                        "example": ""
+                    }
+                },
+                "type": "object"
+            },
             "Profile": {
                 "properties": {
                     "firstname": {
@@ -265,6 +419,33 @@
                 },
                 "type": "object"
             },
+            "Trip": {
+                "properties": {
+                    "start_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": ""
+                    },
+                    "end_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": ""
+                    },
+                    "trip_type": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": ""
+                    }
+                },
+                "type": "object"
+            },
             "User": {
                 "properties": {
                     "username": {
@@ -285,6 +466,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Locations",
+            "description": "Locations"
+        },
         {
             "name": "Users",
             "description": "Users"

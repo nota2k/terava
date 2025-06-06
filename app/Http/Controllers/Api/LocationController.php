@@ -7,11 +7,6 @@ use App\Models\Location;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OA;
 
-#[OA\Info(
-    version: '1.0.0',
-    title: 'API Laravel Locations'
-)]
-
 class LocationController extends Controller
 {
     /**

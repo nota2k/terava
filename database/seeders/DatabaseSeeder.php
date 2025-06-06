@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Profile; // Ajout de l'import pour le modèle Profile
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Location;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +23,8 @@ class DatabaseSeeder extends Seeder
             // eager load the profile relationship
             Profile::factory()->for($user)->create();
         }
+
+        Location::factory()->count(10)->create();
 
 
         // Générer 20 profils fictifs
