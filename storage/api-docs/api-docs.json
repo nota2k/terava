@@ -138,6 +138,180 @@
                 }
             }
         },
+        "/api/trips": {
+            "get": {
+                "tags": [
+                    "Trips"
+                ],
+                "summary": "Récupérer tous les voyages",
+                "operationId": "34b92215d6018d9559a016ee14964292",
+                "responses": {
+                    "200": {
+                        "description": "Liste des voyages"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Trips"
+                ],
+                "summary": "Créer un voyage",
+                "operationId": "20e492b400d879927a7436597763f699",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "start_date",
+                                    "end_date",
+                                    "trip_type",
+                                    "title",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "trip_type": {
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Voyage créé"
+                    },
+                    "400": {
+                        "description": "Erreur de validation"
+                    }
+                }
+            }
+        },
+        "/api/trips/{id}": {
+            "get": {
+                "tags": [
+                    "Trips"
+                ],
+                "summary": "Récupérer un voyage par son ID",
+                "operationId": "13396a55edca639601ea94929fad90ba",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails du voyage"
+                    },
+                    "404": {
+                        "description": "Voyage non trouvé"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Trips"
+                ],
+                "summary": "Mettre à jour un voyage",
+                "operationId": "fec442216c8d1ccea59732e69d7e2b58",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "trip_type": {
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Voyage mis à jour"
+                    },
+                    "404": {
+                        "description": "Voyage non trouvé"
+                    },
+                    "400": {
+                        "description": "Erreur de validation"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Trips"
+                ],
+                "summary": "Supprimer un voyage",
+                "operationId": "3f2b04c340698c1c33dcb6bc11795d30",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Voyage supprimé"
+                    },
+                    "404": {
+                        "description": "Voyage non trouvé"
+                    }
+                }
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [
@@ -469,6 +643,10 @@
         {
             "name": "Locations",
             "description": "Locations"
+        },
+        {
+            "name": "Trips",
+            "description": "Trips"
         },
         {
             "name": "Users",

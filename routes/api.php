@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\TripController;
 
 Route::apiResource('users', App\Http\Controllers\Api\UserController::class);
 Route::get('/users/{id}/profil', [UserController::class, 'getUserProfile']);
@@ -22,3 +23,4 @@ Route::put('/users/{id}/profil', [UserController::class, 'updateUserProfile']);
 // Route::delete('/profiles/{id}', [ProfileController::class, 'destroy']);
 
 Route::apiResource('locations', LocationController::class);
+Route::apiResource('trips', TripController::class);

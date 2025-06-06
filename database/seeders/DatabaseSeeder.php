@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Profile; // Ajout de l'import pour le modèle Profile
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Location;
+use App\Models\Trip;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         }
 
         Location::factory()->count(10)->create();
+        Trip::factory()->count(10)->create();
 
 
         // Générer 20 profils fictifs
