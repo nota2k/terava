@@ -138,6 +138,134 @@
                 }
             }
         },
+        "/api/matches": {
+            "get": {
+                "tags": [
+                    "Matches"
+                ],
+                "summary": "Liste toutes les correspondances",
+                "operationId": "a3b0ee8d77fd59c8b81034a43142f1a3",
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Matches"
+                ],
+                "summary": "Créer une nouvelle correspondance",
+                "operationId": "06c20c0bdb68eb85dfc41da491d455a6",
+                "requestBody": {
+                    "description": "Données de la correspondance",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "App\\Models\\Matche"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Correspondance créée avec succès"
+                    }
+                }
+            }
+        },
+        "/api/matches/{id}": {
+            "get": {
+                "tags": [
+                    "Matches"
+                ],
+                "summary": "Récupérer une correspondance par ID",
+                "operationId": "94139b056e06bc8205dcbac924dc2a24",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la correspondance",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    },
+                    "404": {
+                        "description": "Correspondance non trouvée"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Matches"
+                ],
+                "summary": "Mettre à jour une correspondance",
+                "operationId": "a789c418e6ae8b469fd4e2b58ec56b6f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la correspondance",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Données de la correspondance à mettre à jour",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "App\\Models\\Matche"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Correspondance mise à jour avec succès"
+                    },
+                    "404": {
+                        "description": "Correspondance non trouvée"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Matches"
+                ],
+                "summary": "Supprimer une correspondance",
+                "operationId": "de602074ac0ab8130bad58ee90e61a95",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la correspondance",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Correspondance supprimée avec succès"
+                    },
+                    "404": {
+                        "description": "Correspondance non trouvée"
+                    }
+                }
+            }
+        },
         "/api/trips": {
             "get": {
                 "tags": [
@@ -643,6 +771,10 @@
         {
             "name": "Locations",
             "description": "Locations"
+        },
+        {
+            "name": "Matches",
+            "description": "Matches"
         },
         {
             "name": "Trips",
