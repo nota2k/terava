@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\TripController;
 use App\Http\Controllers\Api\MatcheController;
+use App\Http\Controllers\Api\MessageController;
 
 Route::apiResource('users', App\Http\Controllers\Api\UserController::class);
 Route::get('/users/{id}/profil', [UserController::class, 'getUserProfile']);
@@ -27,3 +28,4 @@ Route::apiResource('locations', LocationController::class);
 Route::apiResource('trips', TripController::class);
 Route::apiResource('matches', MatcheController::class);
 Route::apiResource('profiles', ProfileController::class);
+Route::apiResource('messages', MessageController::class);
