@@ -26,3 +26,4 @@ Route::put('/users/{id}/profil', [UserController::class, 'updateUserProfile']);
 Route::apiResource('locations', LocationController::class);
 Route::apiResource('trips', TripController::class);
 Route::apiResource('matches', MatcheController::class);
+Route::apiResource('profiles', ProfileController::class);

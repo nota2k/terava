@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\belongsTo;
 use OpenApi\Attributes as OA;
 
 #[OA\Schema(schema: "Profile", properties: [
@@ -28,11 +27,11 @@ class Profile extends Model
     protected $fillable = [
         'firstname',
         'lastname',
-        'location',
         'interests',
         'bio',
         'profile_picture',
         'user_id',
+        'birthdate',
     ];
 
     /**
@@ -45,8 +44,8 @@ class Profile extends Model
         'user_id' => 'integer',
     ];
 
-    public function user(): belongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->BelongsTo(User::class, 'user_id', 'id');
     }
 }

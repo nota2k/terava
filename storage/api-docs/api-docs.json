@@ -266,6 +266,141 @@
                 }
             }
         },
+        "/api/profiles": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Lister tous les profils",
+                "operationId": "3209d3b3ace427ff126d7e173f0e6759",
+                "responses": {
+                    "200": {
+                        "description": "Succès"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Créer un nouveau profil",
+                "operationId": "b8873d217549ada3677c5334401e5622",
+                "requestBody": {
+                    "description": "Données du profil",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Profile"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Profil créé avec succès"
+                    }
+                }
+            }
+        },
+        "/api/profiles/{id}": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Récupérer un profil par ID",
+                "operationId": "4c97aadaa22fadcd119f2cc6e55cf624",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du profil",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Profile"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Profil ou utilisateur non trouvé"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Mettre à jour un profil",
+                "operationId": "16d08e84b8ee4ad6e1fa16bef8a7baac",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du profil",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Données du profil à mettre à jour",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Profile"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Profil mis à jour avec succès"
+                    },
+                    "404": {
+                        "description": "Profil non trouvé"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Supprimer un profil",
+                "operationId": "3b8a8572606da7a63904b9f1d1c0d4cd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID du profil",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Profil supprimé avec succès"
+                    },
+                    "404": {
+                        "description": "Profil non trouvé"
+                    }
+                }
+            }
+        },
         "/api/trips": {
             "get": {
                 "tags": [
@@ -775,6 +910,10 @@
         {
             "name": "Matches",
             "description": "Matches"
+        },
+        {
+            "name": "Profiles",
+            "description": "Profiles"
         },
         {
             "name": "Trips",

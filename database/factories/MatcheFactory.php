@@ -22,10 +22,10 @@ class MatcheFactory extends Factory
     public function definition(): array
     {
         return [
-            'trip1_id' => Trip::inRandomOrder()->first()->id ?? Trip::factory()->create()->id,
-            'trip2_id' => Trip::inRandomOrder()->first()->id ?? Trip::factory()->create()->id,
-            'matched_at' => Carbon::now()->subDays(rand(1, 30)),
-            'status' => $this->faker->randomElement(['pending', 'confirmed', 'declined']),
+            // 'trip1_id' => Trip::inRandomOrder()->first()->id ?? Trip::factory()->create()->id,
+            // 'trip2_id' => Trip::inRandomOrder()->first()->id ?? Trip::factory()->create()->id,
+            // 'matched_at' => Carbon::now()->subDays(rand(1, 30)),
+            // 'status' => $this->faker->randomElement(['pending', 'confirmed', 'declined']),
         ];
     }
 }
