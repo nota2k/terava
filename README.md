@@ -74,6 +74,12 @@ php artisan migrate
 Pour lancer Reverb, il faut entrer dans le terminal cette commande: 
 php artisan reverb:start --host=0.0.0.0 --port=8081
 
+## Lancer Reverb
+Pour lancer Reverb vous devez executer cette commande dans le terminal
+```bash
+php artisan reverb:start --host=0.0.0.0 --port=8081
+```
+
 ## Pour générer des fake data
 Les données sont préformatées dans les Factories, FakerPHP va générer de fausses données via ses propres fonctions. On peut retrouver l'ensemble des fonctions dans https://fakerphp.org/
 Puis pour seeder la base de données avec les fausses data :
