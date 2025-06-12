@@ -65,11 +65,14 @@ composer run dev
 ```
 Le projet se lance sur par défaut sur ``http://127.0.0.1:8000/``
 
-
 ## Pour lancer une première migration
 ```bash
 php artisan migrate
 ```
+## Lancer Reverb
+
+Pour lancer Reverb, il faut entrer dans le terminal cette commande: 
+php artisan reverb:start --host=0.0.0.0 --port=8081
 
 ## Pour générer des fake data
 Les données sont préformatées dans les Factories, FakerPHP va générer de fausses données via ses propres fonctions. On peut retrouver l'ensemble des fonctions dans https://fakerphp.org/
