@@ -24,6 +24,7 @@ class UserFactory extends Factory
             'username' => fake()->userName(),
             'email' => fake()->safeEmail(),
             'password' => fake()->password(),
+            'accept_policy' => fake()->boolean(),
         ];
     }
 }
