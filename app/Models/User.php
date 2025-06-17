@@ -7,11 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use OpenApi\Attributes as OA;
 
-#[OA\Schema(schema: "User", properties: [
-    new OA\Property(property: "username", type: "string", example: ""),
-    new OA\Property(property: "email", type: "string", example: ""),
-    new OA\Property(property: "password", type: "string", example: "")
-])]
+#[OA\Schema(
+    schema: "User",
+    type: "object",
+    properties: [
+        new OA\Property(property: "id", type: "integer", example: 1),
+        new OA\Property(property: "username", type: "string", example: "john_doe"),
+        new OA\Property(property: "email", type: "string", format: "email", example: "john@example.com"),
+        new OA\Property(property: "created_at", type: "string", format: "date-time", example: "2024-01-01T12:00:00Z"),
+        new OA\Property(property: "updated_at", type: "string", format: "date-time", example: "2024-01-01T12:00:00Z"),
+    ]
+)]
+class UserSchema {}
+
 
 class User extends Model
 {

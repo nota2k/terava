@@ -780,14 +780,40 @@
                     "Users"
                 ],
                 "summary": "Créer un nouvel utilisateur",
-                "operationId": "store",
+                "operationId": "2bb790bde530c0310dc1a0b47a7291a3",
                 "requestBody": {
-                    "description": "Objet utilisateur à créer",
+                    "description": "Données de l'utilisateur à créer",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "required": [
+                                    "username",
+                                    "email",
+                                    "password",
+                                    "accept_policy"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "john_doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "securePassword123"
+                                    },
+                                    "accept_policy": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
                     }
@@ -802,6 +828,9 @@
                                 }
                             }
                         }
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
                     }
                 }
             }

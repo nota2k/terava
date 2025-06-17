@@ -111,31 +111,65 @@ class UserController extends Controller
 
     #[OA\Post(
         path: '/api/users',
-        tags: ['Users'],
         summary: 'Créer un nouvel utilisateur',
-        operationId: 'store',
+        tags: ['Users'],
         requestBody: new OA\RequestBody(
-            description: 'Objet utilisateur à créer',
             required: true,
+            description: 'Données de l\'utilisateur à créer',
             content: new OA\JsonContent(
-                ref: User::class
+                type: 'object',
+                required: ['username', 'email', 'password', 'accept_policy'],
+                properties: [
+                    new OA\Property(property: 'username', type: 'string', example: 'john_doe'),
+                    new OA\Property(property: 'email', type: 'string', format: 'email', example: 'john@example.com'),
+                    new OA\Property(property: 'password', type: 'string', format: 'password', example: 'securePassword123'),
+                    new OA\Property(property: 'accept_policy', type: 'boolean', example: true)
+                ]
             )
         ),
         responses: [
             new OA\Response(
                 response: 201,
                 description: 'Utilisateur créé avec succès',
-                content: new OA\JsonContent(
-                    ref: User::class
-                )
+                content: new OA\JsonContent(ref: '#/components/schemas/User')
+            ),
+            new OA\Response(
+                response: 422,
+                description: 'Erreur de validation'
             )
         ]
     )]
     public function store(Request $request)
     {
-        $user = User::create($request->all());
-        return response()->json($user, 201);
+        try {
+            $validated = $request->validate([
+                'username' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:8',
+                'accept_policy' => 'required|boolean',
+            ]);
+
+            $user = \App\Models\User::create([
+                'username' => $validated['username'],
+                'email' => $validated['email'],
+                'password' => bcrypt($validated['password']),
+                'accept_policy' => $validated['accept_policy'],
+            ]);
+
+            return response()->json($user, 201);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'message' => 'Erreur de validation',
+                'errors' => $e->errors(),
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Erreur serveur',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
+
 
     #[OA\Put(
         path: '/api/users/{id}',
