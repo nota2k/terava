@@ -64,10 +64,10 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'gender' => 'nullable|string|max:50',
-            'birthdate' => 'nullable|date',
+            'firstname' => 'nullable|string|max:255',
+            'lastname' => 'nullable|string|max:255',
+            'gender' => 'required|in:homme,femme',
+            'birthdate' => 'required|date',
             'bio' => 'nullable|string',
             'interests' => 'nullable|string',
             'profile_picture' => 'nullable|string|url',
