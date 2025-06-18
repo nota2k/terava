@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use OpenApi\Attributes as OA;
+use Illuminate\Support\Facades\Hash;
 
 #[OA\Info(
     version: '1.0.0',
@@ -67,6 +68,74 @@ class UserController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
         return response()->json($user);
+    }
+
+    #[OA\Post(
+        path: '/api/login',
+        summary: 'Connexion d\'un utilisateur',
+        tags: ['Auth'],
+        requestBody: new OA\RequestBody(
+            required: true,
+            description: 'Données de connexion',
+            content: new OA\JsonContent(
+                type: 'object',
+                required: ['email', 'password'],
+                properties: [
+                    new OA\Property(property: 'email', type: 'string', example: 'user@example.com'),
+                    new OA\Property(property: 'password', type: 'string', example: 'securePassword123')
+                ]
+            )
+        ),
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Connexion réussie',
+                content: new OA\JsonContent(
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'message', type: 'string', example: 'Connexion réussie !'),
+                        new OA\Property(
+                            property: 'user',
+                            ref: '#/components/schemas/User'
+                        )
+                    ]
+                )
+            ),
+            new OA\Response(
+                response: 401,
+                description: 'Identifiants incorrects',
+                content: new OA\JsonContent(
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'message', type: 'string', example: 'Email ou mot de passe incorrect')
+                    ]
+                )
+            )
+        ]
+    )]
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string'
+        ]);
+
+        $user = User::where('email', $credentials['email'])->first();
+
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            return response()->json(['message' => 'Connexion réussie !']);
+        } else {
+            return response()->json(['message' => 'Email ou mot de passe incorrect'], 401);
+        }
+
+        // Optionnel : création d’un token si tu veux l’authentifier via un token
+        // $token = $user->createToken('api-token')->plainTextToken;
+
+        return response()->json([
+            'message' => 'Connexion réussie',
+            'user' => $user,
+            // 'token' => $token
+        ]);
     }
 
     #[OA\Get(

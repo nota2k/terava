@@ -780,7 +780,7 @@
                     "Users"
                 ],
                 "summary": "Créer un nouvel utilisateur",
-                "operationId": "2bb790bde530c0310dc1a0b47a7291a3",
+                "operationId": "be551c1d694a01c164966f58bfa77013",
                 "requestBody": {
                     "description": "Données de l'utilisateur à créer",
                     "required": true,
@@ -936,6 +936,77 @@
                     },
                     "404": {
                         "description": "Utilisateur non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Connexion d'un utilisateur",
+                "operationId": "afd167661891a2c4c1b49a04643b9223",
+                "requestBody": {
+                    "description": "Données de connexion",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "securePassword123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Connexion réussie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Connexion réussie !"
+                                        },
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Identifiants incorrects",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Email ou mot de passe incorrect"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1123,17 +1194,28 @@
             },
             "User": {
                 "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
                     "username": {
                         "type": "string",
-                        "example": ""
+                        "example": "john_doe"
                     },
                     "email": {
                         "type": "string",
-                        "example": ""
+                        "format": "email",
+                        "example": "john@example.com"
                     },
-                    "password": {
+                    "created_at": {
                         "type": "string",
-                        "example": ""
+                        "format": "date-time",
+                        "example": "2024-01-01T12:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-01-01T12:00:00Z"
                     }
                 },
                 "type": "object"
@@ -1168,6 +1250,10 @@
         {
             "name": "Users",
             "description": "Users"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
         }
     ]
 }

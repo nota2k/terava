@@ -18,7 +18,6 @@ use OpenApi\Attributes as OA;
         new OA\Property(property: "updated_at", type: "string", format: "date-time", example: "2024-01-01T12:00:00Z"),
     ]
 )]
-class UserSchema {}
 
 
 class User extends Model

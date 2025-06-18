@@ -31,4 +31,4 @@ Route::apiResource('matches', MatcheController::class);
 Route::apiResource('profiles', ProfileController::class);
 Route::apiResource('messages', MessageController::class);
 
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
