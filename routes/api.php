@@ -7,9 +7,9 @@ use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\TripController;
 use App\Http\Controllers\Api\MatcheController;
 use App\Http\Controllers\Api\MessageController;
-use App\Http\Controllers\Api\AuthController;
 
 Route::apiResource('users', App\Http\Controllers\Api\UserController::class);
+Route::post('/login', [UserController::class, 'login']);
 Route::get('/users/{id}/profil', [UserController::class, 'getUserProfile']);
 Route::put('/users/{id}/profil', [UserController::class, 'updateUserProfile']);
 // Route::get('/api/users/{id}/profile', [UserController::class, 'getUserProfile']);
@@ -30,5 +30,3 @@ Route::apiResource('trips', TripController::class);
 Route::apiResource('matches', MatcheController::class);
 Route::apiResource('profiles', ProfileController::class);
 Route::apiResource('messages', MessageController::class);
-
-Route::post('/login', [AuthController::class, 'login']);

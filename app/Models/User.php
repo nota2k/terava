@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use OpenApi\Attributes as OA;
+use Illuminate\Support\Facades\Hash;
 
 #[OA\Schema(
     schema: "User",
@@ -54,6 +55,11 @@ class User extends Model
     protected $casts = [
         'id' => 'integer',
     ];
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
 
     public function profile(): HasOne
     {

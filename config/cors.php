@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://terava.nellybabillon.fr', 'http://localhost:5173'],
+    'allowed_origins' => ['http://localhost:5173', 'https://terava.nellybabillon.fr/'],
 
     'allowed_origins_patterns' => [],
 

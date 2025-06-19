@@ -123,18 +123,13 @@ class UserController extends Controller
         $user = User::where('email', $credentials['email'])->first();
 
         if ($user && Hash::check($credentials['password'], $user->password)) {
-            return response()->json(['message' => 'Connexion réussie !']);
-        } else {
-            return response()->json(['message' => 'Email ou mot de passe incorrect'], 401);
+            // Authentification réussie
+            // Auth::login($user); // si tu veux gérer une vraie session
+            return redirect()->route('dashboard');
         }
 
-        // Optionnel : création d’un token si tu veux l’authentifier via un token
-        // $token = $user->createToken('api-token')->plainTextToken;
-
-        return response()->json([
-            'message' => 'Connexion réussie',
-            'user' => $user,
-            // 'token' => $token
+        return back()->withErrors([
+            'email' => 'Email ou mot de passe invalide.',
         ]);
     }
 
@@ -221,7 +216,7 @@ class UserController extends Controller
             $user = \App\Models\User::create([
                 'username' => $validated['username'],
                 'email' => $validated['email'],
-                'password' => bcrypt($validated['password']),
+                'password' => $validated['password'],
                 'accept_policy' => $validated['accept_policy'],
             ]);
 
