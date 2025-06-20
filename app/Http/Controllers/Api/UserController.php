@@ -123,14 +123,13 @@ class UserController extends Controller
         $user = User::where('email', $credentials['email'])->first();
 
         if ($user && Hash::check($credentials['password'], $user->password)) {
-            // Authentification réussie
-            // Auth::login($user); // si tu veux gérer une vraie session
-            return redirect()->route('dashboard');
+            return response()->json([
+                'message' => 'Connexion réussie !',
+                'user' => $user
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => 'Email ou mot de passe invalide.',
-        ]);
+        return response()->json(['message' => 'Email ou mot de passe incorrect'], 401);
     }
 
     #[OA\Get(
@@ -216,7 +215,7 @@ class UserController extends Controller
             $user = \App\Models\User::create([
                 'username' => $validated['username'],
                 'email' => $validated['email'],
-                'password' => $validated['password'],
+                'password' => bcrypt($request->password),
                 'accept_policy' => $validated['accept_policy'],
             ]);
 
