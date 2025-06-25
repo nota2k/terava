@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use OpenApi\Attributes as OA;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+
+
 
 #[OA\Schema(
     schema: "User",
@@ -21,9 +27,9 @@ use Illuminate\Support\Facades\Hash;
 )]
 
 
-class User extends Model
+class User extends Authenticatable implements AuthenticatableContract
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'users';
     /**
@@ -35,6 +41,7 @@ class User extends Model
         'username',
         'email',
         'password',
+        'password_confirmation',
         'accept_policy',
     ];
 

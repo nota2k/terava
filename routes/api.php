@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\TripController;
 use App\Http\Controllers\Api\MatcheController;
 use App\Http\Controllers\Api\MessageController;
 
-Route::post('/login', [UserController::class, 'login']);
+// Route::post('/login', [UserController::class, 'login']);
 Route::apiResource('users', App\Http\Controllers\Api\UserController::class);
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/users/{id}/profil', [UserController::class, 'getUserProfile']);
